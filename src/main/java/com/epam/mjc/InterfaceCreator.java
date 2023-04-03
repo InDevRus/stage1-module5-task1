@@ -1,5 +1,6 @@
 package com.epam.mjc;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,10 @@ import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 public class InterfaceCreator {
-    private static final Pattern THREE_WORDS_PATTERN = Pattern.compile("([A-Z][a-zA-Z]+) ((?:[a-zA-Z]+ ){2,})([a-zA-Z]+)\\.");
+    private static final String CAPITALIZED_WORD_PATTERN = "[A-Z][a-zA-Z]*";
+    private static final String WORD_PATTERN = "[a-zA-Z]+";
+    private static final Pattern THREE_WORDS_PATTERN = Pattern.compile(String
+            .format("%1$s (?:%2$s ){2,}%2$s\\.", CAPITALIZED_WORD_PATTERN, WORD_PATTERN));
 
     public Predicate<List<String>> isValuesStartWithUpperCase() {
         return list -> {
